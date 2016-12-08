@@ -56,7 +56,9 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
+  //add by me
   compile 'org.grails.plugins:spring-security-oauth2-provider:3.0.0-RC2'
+  compile 'org.grails:grails-datastore-rest-client'
 }
 
 bootRun {
