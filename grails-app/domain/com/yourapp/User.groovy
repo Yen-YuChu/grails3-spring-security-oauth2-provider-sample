@@ -18,6 +18,10 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 
+  //add new attributes
+  String email
+  byte[] photo
+
 	User(String username, String password) {
 		this()
 		this.username = username
@@ -47,9 +51,14 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+
+    //add by new
+    photo ( nullable: true);
 	}
 
 	static mapping = {
 		password column: '`password`'
+    //add by new
+    photo(sqlType: "longblob");
 	}
 }

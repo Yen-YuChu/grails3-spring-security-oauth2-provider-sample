@@ -17,7 +17,9 @@ class BootStrap {
               enabled: true,
               accountExpired: false,
               accountLocked: false,
-              passwordExpired: false
+              passwordExpired: false,
+              email: "my-user@test.outh2",
+              photo: null
       ).save(flush: true)
 
       UserRole.create(user, roleUser, true)
