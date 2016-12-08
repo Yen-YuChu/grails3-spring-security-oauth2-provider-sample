@@ -1,9 +1,10 @@
 # grails3-spring-security-oauth2-provider-sample
 
-1.	Create your grails 3 application(with grails 3 SDK)
+Create your grails 3 application(with grails 3 SDK)
 I think use an IDE create is a good way and naming oauth2-test
 
-2.	Add maven repositories and dependencies in bulid.gradle
+Add maven repositories and dependencies in bulid.gradle
+	
 ```
 repositories {
     mavenLocal()
@@ -19,22 +20,22 @@ dependencies {
 Fix RC2 can’t found
 https://github.com/bluesliverx/grails-spring-security-oauth2-provider/issues/126
 
-3.	Using s2-init-oauth2-provider with grails to create your domain class
+Using s2-init-oauth2-provider with grails to create your domain class
 Client, AuthorizationCode, AccessToken and RefreshToken.
 com.yourapp you can change it for your package name
 ```
 # grails s2-init-oauth2-provider com.yourapp Client AuthorizationCode AccessToken RefreshToken
 ```
-4.	Using s2-quickstart [com.yourapp] User Role to create domain class User, Role, and UserRole for spring security
+Using s2-quickstart [com.yourapp] User Role to create domain class User, Role, and UserRole for spring security
 ```
 # grails s2-quickstart com.yourapp User Role
 ```
-5.	Run application for configuring Spring Security Core and OAuth2 Provider
+Run application for configuring Spring Security Core and OAuth2 Provider
 ```
 # grails run-app
 ```
 
-6.	Open /grails-app/conf/application.groovy config
+Open /grails-app/conf/application.groovy config
 You can see as below
 
 ```
@@ -87,13 +88,13 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 ```
 
-7.	Add oauth url mapping in UrlMappings, it can be skip for new version
+Add oauth url mapping in UrlMappings, it can be skip for new version
 ```
 "/oauth/authorize" (uri:"/oauth/authorize.dispatch")
 "/oauth/token" (uri:"/oauth/token.dispatch")
 ```
 
-8.	For now, we don’t have a user and role for spring security, so we add them in BootStrap.groovy
+For now, we don’t have a user and role for spring security, so we add them in BootStrap.groovy
 ```
 def init = { servletContext ->
 
@@ -130,13 +131,8 @@ curl -X POST -u my-client -d "grant_type=client_credentials" -d "scope=read" htt
 ``` 
 
 They are different from grant_type, and the second command don’t pass username and password for user. 
-If you want to get client_credentirals from POSTMAN, for example
+And we can use POSTMAN tool to get client_credentirals.
  
- 
-
-
-
-
 OK, we succeed to build an OAuth2 Provider, now we want to use the token to request our REST API basic on Spring Security.
 
 In theory, an Authorization Server and Resource Server (our functional methods)
@@ -145,12 +141,12 @@ http://security.stackexchange.com/questions/83450/why-would-you-decouple-your-re
 
 So, continue to your project. 
 
-1.	Create your controller
+Create your controller
 ```
 # grails create-controller sample
 ```
 
-2.	Put sample code in index method
+Put sample code in index method
 ```
 import grails.converters.JSON
 class SampleController {
@@ -161,14 +157,13 @@ class SampleController {
 }
 ```
 
-3.	Add config in UrlMappings.groovy
+Add config in UrlMappings.groovy
 ```
 "/sample"(controller: "sample", action:"index", method: "GET")
 ```
 Test it first.
- 
 
-4.	Add Spring Security @annotation in index() method
+Add Spring Security @annotation in index() method
 ```
 	package oauth2.test
 import grails.converters.JSON
@@ -183,7 +178,6 @@ class SampleController {
 ```
 And test it again.
  
-
 Because of “unauthorized” occurs, using POSTMAN to get access_token for Spring Security.
  
 Because we @Secured(“#oauth2.isClient()”) and according to POSTMAN is a client for our application, so POSTMAN can use this method.
