@@ -66,6 +66,8 @@ class AuthController {
   @Secured("#oauth2.isUser()")
   def uploadPhoto(params)
   {
+    println "id : $params.id";
+
     if (params.id)
     {
       def file = request.getFile('file');

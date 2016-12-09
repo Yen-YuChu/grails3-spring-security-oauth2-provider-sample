@@ -1,5 +1,7 @@
 package oauth2.test
 
+import com.yourapp.User
+
 class UrlMappings {
 
     static mappings = {
@@ -14,9 +16,11 @@ class UrlMappings {
         "/auth/auth_facebook"(controller: "auth", action:"authFacebook", method: "GET")
         "/auth/auth_google"(controller: "auth", action:"authGoogle", method: "GET")
         "/auth/logout"(controller: "auth", action:"logout", method: "GET")
-        "/auth/savephoto"(controller: "auth", action: "uploadPhoto", method:"POST")
+        "/auth/savephoto/$id"(controller: "auth",action: "uploadPhoto",method:"POST")
+        "/auth/loadphoto/$id"(controller: "auth",action: "downloadPhoto",method:"GET");
 
-      "/auth/loadphoto"(controller: "auth", action: "downloadPhoto", method:"GET")
+        //"/auth/savephoto"(controller: "auth", action: "uploadPhoto", method:"POST")
+        //"/auth/loadphoto"(controller: "auth", action: "downloadPhoto", method:"GET")
 
         "/register"(controller: 'register',action: "save", method:"POST")
 

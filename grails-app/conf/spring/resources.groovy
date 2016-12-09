@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices
 beans = {
 
   tokenServices(DefaultTokenServices){
-    accessTokenValiditySeconds =  600;
+    accessTokenValiditySeconds =  1800;
     tokenStore = ref('tokenStore')
     supportRefreshToken = true;
     clientDetailsService = ref('clientDetailsService')
