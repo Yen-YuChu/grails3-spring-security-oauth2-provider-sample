@@ -38,11 +38,14 @@ class AuthController {
   def downloadPhoto(params)
   {
     def content = loadPhoto(params);
-    if(content)
+    if (content)
     {
       println "if content";
       response.outputStream << content;
       response.status = 200;
+    }else
+    {
+      render status : 204; //we don't want to return 500, so render status 204(No content), on grails 3
     }
 
   }
