@@ -34,6 +34,32 @@ class AuthController {
 
   }
 
+  /** Remember this function only can work in AisleConnect user, but not for FB or Google user*/
+  @Secured("#oauth2.isClient()")
+  def forgotPassword(params)
+  {
+    def email = params.email;
+    def new_password = params.newPassword;
+    /** In AisleConnect user, username is an email's pattern*/
+    def count = User.executeQuery("select count(*) from User where username = '$email'")
+    println count[0];
+
+    if (count[0] != 1)
+    {
+      render status : 404;
+    }
+    else
+    {
+      User user = User.findByUsername(email);
+      user.password = new_password;
+      //user.password = user.username;
+      user.save(failOnError: true);
+      println "update user's password for $user.username";
+      def map = [forgotPassword_and_update_suceed: true]
+      render map as JSON;
+    }
+  }
+
   @Secured("#oauth2.isUser()")
   def downloadPhoto(params)
   {
@@ -50,18 +76,24 @@ class AuthController {
 
   }
 
-  def loadPhoto(params)
+  protected loadPhoto(params)
   {
     println "downloadPhoto";
     User u = User.get(params.id as Long)
-    if(!u)
+    if (!u)
     {
       throw new IllegalArgumentException("User with ID ${params.id} not found");
     }
-    if(u?.photo)
+    if (u?.photo)
     {
       println "user has photo";
       return u.photo;
+    }else
+    {
+      println("User with ID ${params.id} has no photo; using default!");
+      /** reference http://stackoverflow.com/questions/4706945/grails-resource-paths-in-controller*/
+      File noAvatar = grailsAttributes.getApplicationContext().getResource("/images/no_avatar.png").getFile()
+      return noAvatar.newInputStream();
     }
 
   }

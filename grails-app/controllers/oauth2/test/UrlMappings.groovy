@@ -19,6 +19,7 @@ class UrlMappings {
         "/auth/savephoto/$id"(controller: "auth",action: "uploadPhoto",method:"POST")
         "/auth/loadphoto/$id"(controller: "auth",action: "downloadPhoto",method:"GET");
 
+        "/auth/forgetPassword"(controller: "auth", action:"forgotPassword", method: "GET")
         //"/auth/savephoto"(controller: "auth", action: "uploadPhoto", method:"POST")
         //"/auth/loadphoto"(controller: "auth", action: "downloadPhoto", method:"GET")
 
