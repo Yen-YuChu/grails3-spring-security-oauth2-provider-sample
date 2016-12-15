@@ -28,6 +28,9 @@ class RegisterController {
           person = new User(username: signup.username, password: signup.password, email: signup.email).save(flush: true)
           def userRole = Role.findByAuthority('ROLE_USER')
           UserRole.create(person, userRole)
+          def map = [suceed: true]
+          render map as JSON;
+          return
         } else {
           response.status = 400
           def error = [

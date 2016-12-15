@@ -20,6 +20,12 @@ class UrlMappings {
         "/auth/loadphoto/$id"(controller: "auth",action: "downloadPhoto",method:"GET");
 
         "/auth/forgetPassword"(controller: "auth", action:"forgotPassword", method: "GET")
+
+        "/message/"(controller: "message", action: "create", method: "POST")
+        "/message/$id"(controller: "message", action:"update", method: "PUT")
+        "/message/$id"(controller: "message", action:"show", method: "GET")
+        "/message/$id"(controller: "message", action:"delete", method: "DELETE")
+        "/message/all"(controller: "message", action:"index", method: "GET")
         //"/auth/savephoto"(controller: "auth", action: "uploadPhoto", method:"POST")
         //"/auth/loadphoto"(controller: "auth", action: "downloadPhoto", method:"GET")
 
